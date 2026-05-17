@@ -1,0 +1,10 @@
+{
+  "country": "Pakistan",
+  "account_ownership_pct": 27.2960071761925,
+  "account_ownership_female_pct": 11.9121696598431,
+  "bank_branches_per_100k": 10.8332490960739,
+  "gdp_per_capita_usd": 1478.77277977996,
+  "gini_index": 33.5,
+  "labor_force_participation_pct": 52.335,
+  "source": "WorldBank_API"
+}

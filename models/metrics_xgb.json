@@ -1,0 +1,9 @@
+{
+  "model": "XGBoost",
+  "auc_roc": 0.7285,
+  "f1": 0.5965,
+  "precision": 0.5484,
+  "recall": 0.6538,
+  "brier": 0.2128,
+  "ks_stat": 0.0998
+}

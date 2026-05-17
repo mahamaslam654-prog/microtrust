@@ -1,0 +1,82 @@
+{
+  "lifeline": {
+    "slab": "0-50",
+    "rate": 3.95,
+    "income_range": "0-15000",
+    "trust_weight": 0.1,
+    "units_range": [
+      0,
+      50
+    ]
+  },
+  "very_low": {
+    "slab": "1-100",
+    "rate": 13.99,
+    "income_range": "15000-25000",
+    "trust_weight": 0.2,
+    "units_range": [
+      50,
+      120
+    ]
+  },
+  "low": {
+    "slab": "101-200",
+    "rate": 26.97,
+    "income_range": "25000-35000",
+    "trust_weight": 0.3,
+    "units_range": [
+      100,
+      220
+    ]
+  },
+  "lower_middle": {
+    "slab": "201-300",
+    "rate": 39.47,
+    "income_range": "35000-50000",
+    "trust_weight": 0.45,
+    "units_range": [
+      180,
+      320
+    ]
+  },
+  "middle": {
+    "slab": "301-400",
+    "rate": 45.58,
+    "income_range": "50000-70000",
+    "trust_weight": 0.6,
+    "units_range": [
+      280,
+      430
+    ]
+  },
+  "upper_middle": {
+    "slab": "401-500",
+    "rate": 50.31,
+    "income_range": "70000-100000",
+    "trust_weight": 0.7,
+    "units_range": [
+      380,
+      530
+    ]
+  },
+  "high": {
+    "slab": "501-700",
+    "rate": 53.56,
+    "income_range": "100000-150000",
+    "trust_weight": 0.8,
+    "units_range": [
+      480,
+      720
+    ]
+  },
+  "affluent": {
+    "slab": "700+",
+    "rate": 55.24,
+    "income_range": "150000+",
+    "trust_weight": 0.9,
+    "units_range": [
+      650,
+      950
+    ]
+  }
+}

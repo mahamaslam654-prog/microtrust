@@ -1,0 +1,12 @@
+{
+  "source": "SBP_FSR_2024",
+  "mfb_infection_ratio_pct": 22.5,
+  "mfb_avg_loan_size_pkr": 65000,
+  "mfb_total_borrowers_million": 8.2,
+  "mfb_female_borrowers_pct": 43.0,
+  "pk_informal_workforce_pct": 72.0,
+  "pk_mobile_wallet_users_million": 87.0,
+  "pk_unbanked_adults_pct": 72.7,
+  "pk_avg_microloan_tenor_months": 12,
+  "scraped_date": "2026-05-17"
+}

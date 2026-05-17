@@ -1,0 +1,9 @@
+{
+  "model": "Random Forest",
+  "auc_roc": 0.7365,
+  "f1": 0.5962,
+  "precision": 0.5962,
+  "recall": 0.5962,
+  "brier": 0.2087,
+  "ks_stat": 0.1072
+}

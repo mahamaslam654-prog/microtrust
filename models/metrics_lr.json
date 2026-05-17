@@ -1,0 +1,9 @@
+{
+  "model": "Logistic Regression",
+  "auc_roc": 0.6781,
+  "f1": 0.5192,
+  "precision": 0.5192,
+  "recall": 0.5192,
+  "brier": 0.2207,
+  "ks_stat": 0.1217
+}

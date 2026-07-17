@@ -8,7 +8,9 @@ An AI-powered micro-finance risk assessment system for Pakistan's informal econo
 
 ## Live Demo
 
-- **Backend API:** https://microtrust-1uvl.onrender.com
+Frontend: https://microtrust.vercel.app
+
+Backend API: https://microtrust-1uvl.onrender.com
 
 ## Tech Stack
 - Backend: FastAPI (Python)

@@ -6,6 +6,10 @@ An AI-powered micro-finance risk assessment system for Pakistan's informal econo
 - SDG 1 — No Poverty
 - SDG 10 — Reduced Inequalities
 
+## Live Demo
+
+- **Backend API:** https://microtrust-1uvl.onrender.com
+
 ## Tech Stack
 - Backend: FastAPI (Python)
 - Frontend: React.js

@@ -3,12 +3,12 @@
 # Run with: uvicorn api.main:app --reload
 # POST /predict -> trust_score, risk_band, top 5 SHAP contributors
 
-import numpy as np
-import pandas as pd
-import pickle, joblib, sys, os
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
+import numpy as np
+import pandas as pd
+import pickle, joblib, sys, os
 
 sys.path.insert(0, ".")
 from features.feature_store import build_pipeline
@@ -18,9 +18,9 @@ app = FastAPI(title="MicroTrust API", version="1.0")
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
+    allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
-    allow_credentials=False,
 )
 
 # Load model and explainer on startup

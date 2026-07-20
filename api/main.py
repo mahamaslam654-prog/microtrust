@@ -1,10 +1,7 @@
 # api/main.py
-# FastAPI backend — serves Trust Score predictions
-# Run with: uvicorn api.main:app --reload
-# POST /predict -> trust_score, risk_band, top 5 SHAP contributors
-
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
 from pydantic import BaseModel
 import numpy as np
 import pandas as pd
@@ -15,22 +12,28 @@ from features.feature_store import build_pipeline
 
 app = FastAPI(title="MicroTrust API", version="1.0")
 
+origins = [
+    "https://microtrust.vercel.app",
+    "http://localhost:3000",
+    "*"
+]
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
     allow_credentials=False,
-    allow_methods=["*"],
+    allow_methods=["GET", "POST", "OPTIONS"],
     allow_headers=["*"],
+    expose_headers=["*"],
 )
 
 # Load model and explainer on startup
-model    = joblib.load("models/xgboost.joblib")
+model = joblib.load("models/xgboost.joblib")
 with open("models/shap_explainer.pkl", "rb") as f:
     explainer = pickle.load(f)
 
-# Refit pipeline on training data
-train    = pd.read_csv("data/processed/train.csv")
-X_train  = train.drop(columns=["loan_status"])
+train = pd.read_csv("data/processed/train.csv")
+X_train = train.drop(columns=["loan_status"])
 pipeline = build_pipeline()
 pipeline.fit(X_train)
 
@@ -79,19 +82,26 @@ def root():
     return {"message": "MicroTrust API is running"}
 
 
+@app.options("/predict")
+def options_predict():
+    return JSONResponse(
+        content={},
+        headers={
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "POST, OPTIONS",
+            "Access-Control-Allow-Headers": "*",
+        }
+    )
+
+
 @app.post("/predict")
 def predict(applicant: Applicant):
-    # Convert to DataFrame
     data = pd.DataFrame([applicant.model_dump()])
-
-    # Transform
     X = pipeline.transform(data)
 
-    # Predict
     p_default   = float(model.predict_proba(X)[0][1])
     trust_score = round((1 - p_default) * 100, 1)
 
-    # Risk band
     if trust_score >= 65:
         risk_band = "Low Risk"
         color     = "green"
@@ -102,10 +112,8 @@ def predict(applicant: Applicant):
         risk_band = "High Risk"
         color     = "red"
 
-    # SHAP top 5
     shap_vals = explainer(X).values[0]
     top5_idx  = np.argsort(np.abs(shap_vals))[::-1][:5]
-
     feature_names = [f"feature_{i}" for i in range(len(shap_vals))]
     top5 = [
         {
@@ -116,17 +124,19 @@ def predict(applicant: Applicant):
         for i in top5_idx
     ]
 
-    return {
-        "trust_score"  : trust_score,
-        "risk_band"    : risk_band,
-        "color"        : color,
-        "p_default"    : round(p_default, 4),
-        "top5_shap"    : top5,
-        "recommendation": (
+    response = JSONResponse(content={
+        "trust_score"    : trust_score,
+        "risk_band"      : risk_band,
+        "color"          : color,
+        "p_default"      : round(p_default, 4),
+        "top5_shap"      : top5,
+        "recommendation" : (
             "Recommend for micro-loan approval."
             if trust_score >= 65
             else "Further review recommended."
             if trust_score >= 40
             else "High default risk. Do not approve."
         )
-    }
+    })
+    response.headers["Access-Control-Allow-Origin"] = "*"
+    return response

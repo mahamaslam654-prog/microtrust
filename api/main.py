@@ -26,11 +26,10 @@ app.add_middleware(
     allow_headers=["*"],
     expose_headers=["*"],
 )
-
+import shap
 # Load model and explainer on startup
 model = joblib.load("models/xgboost.joblib")
-with open("models/shap_explainer.pkl", "rb") as f:
-    explainer = pickle.load(f)
+explainer = shap.TreeExplainer(model)
 
 train = pd.read_csv("data/processed/train.csv")
 X_train = train.drop(columns=["loan_status"])

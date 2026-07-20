@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts";
-
 const API_URL = "https://microtrust-1uvl.onrender.com";
 
 const defaultForm = {

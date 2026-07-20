@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts";
 
-const API_URL = "http://127.0.0.1:8000";
+const API_URL = "https://microtrust-1uvl.onrender.com";
 
 const defaultForm = {
   person_age: 30,
